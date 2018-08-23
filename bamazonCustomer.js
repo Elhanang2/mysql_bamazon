@@ -99,15 +99,22 @@ connection.connect(function(err) {
             //mysql query to update stock quantity 
             connection.query("update products set ? where ?",[{stock_quantity : quantity},{item_id : itemid}],function(err){
                 if(err)throw err;
-                var totalcost=answer.productunits*parseInt(price);
+                // var previous=answer.product_sales;
+                var totalcost= answer.productunits*parseInt(price);
                 console.log("Total cost : "+totalcost);
+                connection.query("select product_sales from products where ?",{item_id :itemid},function(err,res){
+                    console.log("res  "+res);
+                    var oldresofproductsale=parseInt(res[0].product_sales);
+                    console.log("old   "+oldresofproductsale);
 
+                    connection.query("update products set ? where ? " , [{product_sales:(totalcost + oldresofproductsale) },{item_id :itemid}],function(err,res){
+                        if(err)throw err;
+                        console.log("process payment to get the product ");
+                        connection.end();
+                });
+                });
                 //mysql query to update product sales from the above calculation
-                connection.query("update products set ? where ? " , [{product_sales:totalcost},{item_id :itemid}],function(err,res){
-                    if(err)throw err;
-                    console.log("process payment to get the product ");
-                    connection.end();
-            });
+                
             });
             
           }else if((answer.productunits) > stock && (stock > 0)){
