@@ -46,7 +46,7 @@ function supervisormenu(){
             
             //mysql query to select department id , name ,over head costs ,product sales and total profit 
             connection.query(
-            "select department_id ,d.department_name , over_head_costs , sum(p.product_sales) as product_sales,(product_sales - over_head_costs) as total_profit  from products as p  inner join departments as d on p.department_name = d.department_name  group by department_name order by department_id ASC;",function(err,res){
+            "select department_id ,d.department_name , over_head_costs , sum(p.product_sales) as product_sales,(sum(p.product_sales) - over_head_costs) as total_profit  from products as p  inner join departments as d on  p.department_name =d.department_name  group by department_name order by department_id ASC;",function(err,res){
                 // console.log("result "+ res);
                 console.log("Department Id" + colomnspace(2) + "Department Name" +colomnspace(10) + "Over Head Costs" + colomnspace(6)+"Product Sales" + colomnspace(5) + "Total Profit" );
                 
@@ -57,7 +57,7 @@ function supervisormenu(){
                     var w = (res[j].department_name).length;
                     var z=(res[j].over_head_costs).toString().length;
                    
-                    console.log(res[j].department_id + colomnspace(15-y) + res[j].department_name +colomnspace(25-w) + "$"+ res[j].over_head_costs + colomnspace(20-z)+res[j].product_sales + colomnspace(14)+res[j].total_profit );
+                    console.log(res[j].department_id + colomnspace(15-y) + res[j].department_name +colomnspace(25-w) + "$"+ res[j].over_head_costs + colomnspace(20-z)+(res[j].product_sales) + colomnspace(14)+ parseFloat(res[j].total_profit,2));
                      
                 }
                 connection.end(); 

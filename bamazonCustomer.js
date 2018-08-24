@@ -37,14 +37,17 @@ connection.connect(function(err) {
       //mysql query to view all the table information 
       connection.query("select * from products ",function(err,res){
           if(err)throw err;
-         console.log("Item Id"+colomnspace(6) + "Product Name" + colomnspace(23) + "Price");
+         console.log("Item Id"+colomnspace(6) + "Product Name" + colomnspace(23) + "Price" + colomnspace(11)+"stock quantity"+ colomnspace(4) + "product sales");
         for (var j = 0; j < res.length ; j++){
             //product name length 
             var y=(res[j].product_name).length;
             //item id length
             var z=(res[j].item_id).toString().length;
             //  console.log(z);
-               console.log(res[j].item_id + colomnspace(13-z) + res[j].product_name + colomnspace(35-y)+ "$"+res[j].price);
+            var w=(res[j].stock_quantity).toString().length;
+            var x=(res[j].price).toString().length;
+               console.log(res[j].item_id + colomnspace(13-z) + res[j].product_name + colomnspace(35-y)+ "$"+res[j].price+
+            colomnspace(15-x)+ res[j].stock_quantity + colomnspace(18-w)+res[j].product_sales);
         }
          productid(res);
          // connection.end();
@@ -100,11 +103,11 @@ connection.connect(function(err) {
             connection.query("update products set ? where ?",[{stock_quantity : quantity},{item_id : itemid}],function(err){
                 if(err)throw err;
                 // var previous=answer.product_sales;
-                var totalcost= answer.productunits*parseInt(price);
+                var totalcost= answer.productunits*parseFloat(price,2);
                 console.log("Total cost : "+totalcost);
                 connection.query("select product_sales from products where ?",{item_id :itemid},function(err,res){
                     console.log("res  "+res);
-                    var oldresofproductsale=parseInt(res[0].product_sales);
+                    var oldresofproductsale=parseFloat(res[0].product_sales,2);
                     console.log("old   "+oldresofproductsale);
 
                     connection.query("update products set ? where ? " , [{product_sales:(totalcost + oldresofproductsale) },{item_id :itemid}],function(err,res){
