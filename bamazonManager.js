@@ -217,7 +217,7 @@ function addnewproduct(){
         {
             type : "input",
             name : "unitprice",
-            message : "Give name product unit price "
+            message : "Give product unit price "
         },
         {
             type : "input",
@@ -231,7 +231,10 @@ function addnewproduct(){
                 product_name : answer.productname,
                 department_name : answer.departmentname,
                 price : answer.unitprice,
-                stock_quantity :answer.stockquantity
+                stock_quantity :answer.stockquantity,
+                product_sales :0
+                
+                
             },function(err){
                 if(err)throw err;
                 console.log("row inserted");

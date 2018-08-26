@@ -95,9 +95,9 @@ connection.connect(function(err) {
             
           if(answer.productunits <= stock){
             
-            console.log("stock : "+ answer.productunits);
+            console.log("units : "+ answer.productunits);
             var quantity=stock-answer.productunits;
-            console.log("quantity : "+quantity);
+            console.log("stock quantity : "+quantity);
 
             //mysql query to update stock quantity 
             connection.query("update products set ? where ?",[{stock_quantity : quantity},{item_id : itemid}],function(err){
@@ -106,7 +106,8 @@ connection.connect(function(err) {
                 var totalcost= answer.productunits*parseFloat(price,2);
                 console.log("Total cost : "+totalcost);
                 connection.query("select product_sales from products where ?",{item_id :itemid},function(err,res){
-                    console.log("res  "+res);
+                    console.log("res  "+res[0].product_sales);
+                  
                     var oldresofproductsale=parseFloat(res[0].product_sales,2);
                     console.log("old   "+oldresofproductsale);
 
