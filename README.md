@@ -14,7 +14,10 @@ to see the new department the manager should create new product with new departm
 manager can see all products ready for sell , low inventory products stock quantity less than 5.
 he can also add to inventory and add new product.
 
-https://drive.google.com/file/d/15mT-ZI2nbyWwyLw_WZf5X0Bv5bcT4tCV/view
+https://drive.google.com/file/d/1W40BtmrGrRUqA1HMxPShVd8tKmK_VdPp/view
 
-https://drive.google.com/file/d/1fTWcJDEZJ0LzyaDzf5VV8hLvOTxcAnSM/view
+https://drive.google.com/file/d/1mOV3-aJnhCbhWM1TdDAdJxcZUUbBTU_u/view
+
+https://drive.google.com/file/d/1oKb4V7iY1nCuOqZrD3vR03x28zAQjW28/view
+
 
